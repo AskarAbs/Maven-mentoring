@@ -1,20 +1,18 @@
 package services;
 
 
-
 import entity.User;
 
 public class UserService {
 
     private final User user = new User();
 
-
-    public User setName(){
+    public User setName() {
         user.setName("Ivan");
         return user;
     }
 
-    public String testApp(){
+    public String testApp() {
         return "Ok!";
     }
 }
