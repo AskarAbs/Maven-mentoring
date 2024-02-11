@@ -1,23 +1,31 @@
 package services;
 
+import entity.Users;
+import entity.enums.Role;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
+import util.HibernateUtil;
+import static org.assertj.core.api.Assertions.*;
 
 class UserServiceIT {
 
     @Test
-    public void checkSetName(){
-        UserService userService = new UserService();
-        var user = userService.setName();
-        assertEquals("Ivan",user.getName());
-    }
+    public void checkHibernateCfgTest() {
+        try (var sessionFactory = HibernateUtil.buildSessionFactory();
+             var session = sessionFactory.openSession()) {
+            var expectedUser = Users.builder()
+                    .username("Askar")
+                    .email("askar@gmail.com")
+                    .role(Role.USER)
+                    .build();
+            session.beginTransaction();
 
-    @Test
-    public void checkTestApp(){
+//            session.persist(expectedUser);
+            var actualUser = session.get(Users.class, 1L);
 
-        UserService service = new UserService();
-        var testString = service.testApp();
-        assertEquals("Ok!", testString);
+            expectedUser.setId(1L);
+            assertThat(expectedUser).isEqualTo(actualUser);
+
+            session.getTransaction().commit();
+        }
     }
 }
