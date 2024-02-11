@@ -7,12 +7,12 @@
 
 </br>
 Проект на данный момент содержит в себе 6 сущностей </br>
-- 𝓾𝓼𝓮𝓻𝓼 </br>
-- 𝓯𝓲𝓵𝓶𝓼 </br>
-- 𝓪𝓬𝓽𝓸𝓻𝓼 </br>
-- 𝓭𝓲𝓻𝓮𝓬𝓽𝓸𝓻 </br>
-- 𝓻𝓮𝓿𝓲𝓮𝔀𝓼 </br>
-- 𝓯𝓲𝓵𝓶_𝓪𝓬𝓽𝓸𝓻 </br>
+- users </br>
+- films </br>
+- actors </br>
+- director </br>
+- reviews </br>
+- film_actor </br>
 </br>
 Связь между таблицами можно посмотреть на изображении ниже </br>
 <img src= "https://github.com/AskarAbs/Maven-mentoring/assets/157743997/44776ff9-cdea-40c0-8112-c295add6349a" height="400"/>
