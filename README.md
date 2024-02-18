@@ -15,5 +15,5 @@
 - film_actor </br>
 </br>
 Связь между таблицами можно посмотреть на изображении ниже </br>
-<img src= "https://github.com/AskarAbs/Maven-mentoring/assets/157743997/44776ff9-cdea-40c0-8112-c295add6349a" height="400"/>
+<img src= "https://github.com/AskarAbs/Maven-mentoring/assets/157743997/f52a6d73-3626-40c4-900a-05b4fd60510e" height="400"/>
 <h3 align="center"></h3>
