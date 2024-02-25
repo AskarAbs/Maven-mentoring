@@ -1,6 +1,6 @@
-package com.askar.videoLibrary.entity;
+package com.askar.videolibrary.entity;
 
-import com.askar.videoLibrary.entity.enums.Genre;
+import com.askar.videolibrary.entity.enums.Genre;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,6 +15,7 @@ import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -26,6 +27,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(exclude = {"director", "filmActors"})
+@EqualsAndHashCode(of = {"director", "filmActors"})
 @Builder
 @Entity
 public class Film {
@@ -61,7 +63,7 @@ public class Film {
     private List<FilmActor> filmActors = new ArrayList<>();
 
     @Builder.Default
-    @OneToMany(mappedBy = "film", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "film", cascade = CascadeType.REMOVE)
     private List<Review> reviews = new ArrayList<>();
 
     public void addReview(Review review) {

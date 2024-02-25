@@ -1,9 +1,9 @@
 package services;
 
 
-import com.askar.videoLibrary.entity.Users;
-import com.askar.videoLibrary.entity.enums.Role;
-import com.askar.videoLibrary.util.HibernateTestUtil;
+import com.askar.videolibrary.entity.Users;
+import com.askar.videolibrary.entity.enums.Role;
+import com.askar.videolibrary.util.HibernateTestUtil;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 
@@ -30,4 +30,13 @@ class UsersServiceIT {
             session.getTransaction().commit();
         }
     }
+
+
+    @Test
+    void checkFindUser(){
+
+
+    }
+
+
 }

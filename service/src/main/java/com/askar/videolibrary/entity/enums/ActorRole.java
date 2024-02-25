@@ -1,4 +1,4 @@
-package com.askar.videoLibrary.entity.enums;
+package com.askar.videolibrary.entity.enums;
 
 public enum ActorRole {
     MAIN,SECONDARY

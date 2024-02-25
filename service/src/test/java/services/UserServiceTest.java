@@ -1,6 +1,6 @@
 package services;
 
-import com.askar.videoLibrary.services.UserService;
+import com.askar.videolibrary.services.UserService;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -13,5 +13,6 @@ public class UserServiceTest {
         var testString = userService.testApp();
         assertEquals("Ok!", testString);
     }
+
 
 }

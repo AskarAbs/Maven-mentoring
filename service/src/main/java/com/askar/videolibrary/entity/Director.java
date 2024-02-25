@@ -1,8 +1,7 @@
-package com.askar.videoLibrary.entity;
+package com.askar.videolibrary.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -10,6 +9,7 @@ import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -21,6 +21,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(exclude = "films")
+@EqualsAndHashCode(of = "films")
 @Builder
 @Entity
 public class Director {
@@ -36,7 +37,7 @@ public class Director {
     private LocalDate birthday;
 
     @Builder.Default
-    @OneToMany(mappedBy = "director", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "director")
     private List<Film> films = new ArrayList<>();
 
     public void addFilm(Film film) {

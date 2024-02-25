@@ -1,18 +1,17 @@
-package com.askar.videoLibrary.entityCrud;
+package com.askar.videolibrary.entityCrud;
 
-import com.askar.videoLibrary.entity.Actor;
-import com.askar.videoLibrary.entity.Director;
-import com.askar.videoLibrary.entity.Film;
-import com.askar.videoLibrary.entity.FilmActor;
-import com.askar.videoLibrary.entity.Review;
-import com.askar.videoLibrary.entity.Users;
-import com.askar.videoLibrary.entity.enums.ActorRole;
-import com.askar.videoLibrary.entity.enums.Genre;
-import com.askar.videoLibrary.entity.enums.Role;
-import com.askar.videoLibrary.util.HibernateTestUtil;
+import com.askar.videolibrary.entity.Actor;
+import com.askar.videolibrary.entity.Director;
+import com.askar.videolibrary.entity.Film;
+import com.askar.videolibrary.entity.FilmActor;
+import com.askar.videolibrary.entity.Review;
+import com.askar.videolibrary.entity.Users;
+import com.askar.videolibrary.entity.enums.ActorRole;
+import com.askar.videolibrary.entity.enums.Genre;
+import com.askar.videolibrary.entity.enums.Role;
+import com.askar.videolibrary.util.HibernateTestUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -25,10 +24,11 @@ import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.*;
 
+
 class EntityCrudIT {
 
-    private static SessionFactory sessionFactory = null;
-    private Session session;
+    private static SessionFactory sessionFactory;
+    private static Session session;
 
     @BeforeAll
     static void initSessionFactory() {
@@ -43,11 +43,12 @@ class EntityCrudIT {
 
     @AfterEach
     void closeSession() {
-        this.session.getTransaction().rollback();
+        session.getTransaction().rollback();
     }
 
     @AfterAll
     static void closeSessionFactory() {
+        session.close();
         sessionFactory.close();
     }
 
@@ -60,6 +61,7 @@ class EntityCrudIT {
 
             session.persist(actor);
             session.persist(actor2);
+            session.evict(actor2);
             var actor1 = session.get(Actor.class, actor2.getId());
 
             assertThat(actor1).isEqualTo(actor2);
@@ -88,7 +90,7 @@ class EntityCrudIT {
             session.flush();
             var actualResult = session.get(Actor.class, actor.getId());
 
-            assertThat(actualResult).isEqualTo(null);
+            assertThat(actualResult).isNull();
         }
 
     }
@@ -130,7 +132,7 @@ class EntityCrudIT {
             session.flush();
             var actualResult = session.get(Director.class, director.getId());
 
-            assertThat(actualResult).isEqualTo(null);
+            assertThat(actualResult).isNull();
         }
 
         @Test
@@ -152,7 +154,6 @@ class EntityCrudIT {
     class NestedFilmTest {
         @Test
         void checkCreateAndFindByIdFilm() {
-            Film film = getFilm();
             var film1 = getFilm();
             film1.setGenre(Genre.DETECTIVE);
 
@@ -181,7 +182,7 @@ class EntityCrudIT {
             session.remove(actualFilm);
             var deletedFilm = session.get(Film.class, expectedFilm.getId());
 
-            assertThat(deletedFilm).isEqualTo(null);
+            assertThat(deletedFilm).isNull();
         }
 
         @Test
@@ -214,7 +215,6 @@ class EntityCrudIT {
             assertThat(filmReviews.contains(review)).isTrue();
         }
 
-        @NotNull
         private Film getFilm() {
             var director = createDirector();
             var film = createFilm();
@@ -229,7 +229,6 @@ class EntityCrudIT {
     class NestedFilmActorTest {
         @Test
         void checkCreateAndFindByIdFilmActor() {
-            FilmActor filmActor = getFilmActor();
             FilmActor filmActor1 = getFilmActor();
             filmActor1.setFee(5000L);
 
@@ -265,7 +264,6 @@ class EntityCrudIT {
             assertThat(filmActor.getFilm()).isNotNull();
         }
 
-        @NotNull
         private FilmActor getFilmActor() {
             var director = createDirector();
             var film = createFilm();
@@ -321,7 +319,6 @@ class EntityCrudIT {
         }
 
 
-        @NotNull
         private Review getReview() {
             var director = createDirector();
             var film = createFilm();
@@ -378,6 +375,7 @@ class EntityCrudIT {
 
             assertThat(actualResult).isNull();
         }
+
     }
 
     public Director createDirector() {

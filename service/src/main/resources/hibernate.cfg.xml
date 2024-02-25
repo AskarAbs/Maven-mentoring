@@ -14,11 +14,11 @@
     <property name="show_sql">true</property>
     <property name="format_sql">true</property>
 
-    <mapping class="com.askar.videoLibrary.entity.Actor"/>
-    <mapping class="com.askar.videoLibrary.entity.Director"/>
-    <mapping class="com.askar.videoLibrary.entity.Film"/>
-    <mapping class="com.askar.videoLibrary.entity.Users"/>
-    <mapping class="com.askar.videoLibrary.entity.FilmActor"/>
-    <mapping class="com.askar.videoLibrary.entity.Review"/>
+    <mapping class="com.askar.videolibrary.entity.Actor"/>
+    <mapping class="com.askar.videolibrary.entity.Director"/>
+    <mapping class="com.askar.videolibrary.entity.Film"/>
+    <mapping class="com.askar.videolibrary.entity.Users"/>
+    <mapping class="com.askar.videolibrary.entity.FilmActor"/>
+    <mapping class="com.askar.videolibrary.entity.Review"/>
   </session-factory>
 </hibernate-configuration>

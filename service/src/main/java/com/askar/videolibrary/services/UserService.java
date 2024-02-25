@@ -1,4 +1,4 @@
-package com.askar.videoLibrary.services;
+package com.askar.videolibrary.services;
 
 public class UserService {
 

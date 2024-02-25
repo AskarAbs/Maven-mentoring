@@ -1,4 +1,4 @@
-package com.askar.videoLibrary.util;
+package com.askar.videolibrary.util;
 
 import lombok.experimental.UtilityClass;
 import org.hibernate.SessionFactory;

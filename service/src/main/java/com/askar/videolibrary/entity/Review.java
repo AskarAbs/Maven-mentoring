@@ -1,4 +1,4 @@
-package com.askar.videoLibrary.entity;
+package com.askar.videolibrary.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,6 +10,7 @@ import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -19,6 +20,7 @@ import java.time.Instant;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(exclude = {"user", "film"})
+@EqualsAndHashCode(of = {"user", "film"})
 @Builder
 @Entity
 public class Review {

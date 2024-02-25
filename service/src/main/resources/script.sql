@@ -51,15 +51,9 @@ CREATE TABLE review
     id         BIGSERIAL PRIMARY KEY,
     film_id    BIGINT REFERENCES film (id) ON DELETE CASCADE  NOT NULL,
     user_id    BIGINT REFERENCES users (id) ON DELETE CASCADE NOT NULL,
-    createdAt  TIMESTAMP                                      NOT NULL,
+    created_at  TIMESTAMP                                      NOT NULL,
     text       VARCHAR(256),
     evaluation INT                                            NOT NULL,
     UNIQUE (film_id, user_id)
 );
 
-DROP TABLE users;
-DROP TABLE film;
-DROP TABLE actor;
-DROP TABLE director;
-DROP TABLE review;
-DROP TABLE film_actor;
