@@ -23,7 +23,7 @@ import java.time.Instant;
 @EqualsAndHashCode(exclude = {"user", "film"})
 @Builder
 @Entity
-public class Review {
+public class Review implements BaseEntity<Long>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

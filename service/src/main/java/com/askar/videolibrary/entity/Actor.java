@@ -24,7 +24,7 @@ import java.util.List;
 @EqualsAndHashCode(exclude = "filmActors")
 @Builder
 @Entity
-public class Actor {
+public class Actor implements BaseEntity<Long>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

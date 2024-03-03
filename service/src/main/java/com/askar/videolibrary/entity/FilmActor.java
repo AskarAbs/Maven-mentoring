@@ -26,7 +26,7 @@ import lombok.ToString;
 @Builder
 @Entity
 @Table(name = "film_actor")
-public class FilmActor {
+public class FilmActor implements BaseEntity<Long>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -24,7 +24,7 @@ import java.util.List;
 @EqualsAndHashCode(exclude = "films")
 @Builder
 @Entity
-public class Director {
+public class Director implements BaseEntity<Long>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -26,11 +26,11 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = {"director", "filmActors"})
-@EqualsAndHashCode(exclude = {"director", "filmActors"})
+@ToString(exclude = {"director", "filmActors", "reviews"})
+@EqualsAndHashCode(exclude = {"director", "filmActors", "reviews"})
 @Builder
 @Entity
-public class Film {
+public class Film implements BaseEntity<Long>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -59,7 +59,7 @@ public class Film {
     private Director director;
 
     @Builder.Default
-    @OneToMany(mappedBy = "film")
+    @OneToMany(mappedBy = "film", cascade = CascadeType.REMOVE)
     private List<FilmActor> filmActors = new ArrayList<>();
 
     @Builder.Default
