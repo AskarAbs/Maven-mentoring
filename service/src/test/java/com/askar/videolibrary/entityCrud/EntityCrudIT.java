@@ -28,7 +28,7 @@ import static org.assertj.core.api.Assertions.*;
 class EntityCrudIT {
 
     private static SessionFactory sessionFactory;
-    private static Session session;
+    private Session session;
 
     @BeforeAll
     static void initSessionFactory() {
@@ -48,7 +48,7 @@ class EntityCrudIT {
 
     @AfterAll
     static void closeSessionFactory() {
-        session.close();
+        sessionFactory.getCurrentSession().close();
         sessionFactory.close();
     }
 

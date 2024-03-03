@@ -30,13 +30,4 @@ class UsersServiceIT {
             session.getTransaction().commit();
         }
     }
-
-
-    @Test
-    void checkFindUser(){
-
-
-    }
-
-
 }

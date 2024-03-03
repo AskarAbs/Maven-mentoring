@@ -1,5 +1,6 @@
 package com.askar.videolibrary.entityCrud;
 
+import com.askar.videolibrary.dao.CPredicate;
 import com.askar.videolibrary.dao.QPredicate;
 import com.askar.videolibrary.dto.FilmFilter;
 import com.askar.videolibrary.entity.Director;
@@ -18,7 +19,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.util.ArrayList;
+
 import java.util.List;
 
 import static com.askar.videolibrary.entity.QFilm.film;
@@ -28,7 +29,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class QueryFilterIT {
 
     private static SessionFactory sessionFactory;
-    private static Session session;
+    private Session session;
 
     @BeforeAll
     static void initSessionFactory() {
@@ -49,26 +50,37 @@ public class QueryFilterIT {
 
     @AfterAll
     static void closeSessionFactory() {
-        session.close();
         sessionFactory.close();
     }
 
     @Test
     void checkFindDirectorInFilmWhereGenreIsNullCriteria() {
-        var directors1 = findDirectorInFilmCriteria(session, Genre.ADVENTURES, null, null);
-        assertThat(directors1).hasSize(1);
+        var directors2 = findDirectorInFilmQuerydsl(session, FilmFilter.builder()
+                .genre(Genre.ADVENTURES)
+                .country(null)
+                .name(null)
+                .build());
+        assertThat(directors2).hasSize(1);
     }
 
     @Test
     void checkFindDirectorInFilmWhereNameIsNullCriteria() {
-        var directors1 = findDirectorInFilmCriteria(session, null, "Iron Man", null);
-        assertThat(directors1).hasSize(1);
+        var directors2 = findDirectorInFilmQuerydsl(session, FilmFilter.builder()
+                .genre(null)
+                .country(null)
+                .name("Iron Man")
+                .build());
+        assertThat(directors2).hasSize(1);
     }
 
     @Test
     void checkFindDirectorInFilmWhereCountryIsNullCriteria() {
-        var directors1 = findDirectorInFilmCriteria(session, null, null, "USA");
-        assertThat(directors1).hasSize(2);
+        var directors2 = findDirectorInFilmQuerydsl(session, FilmFilter.builder()
+                .genre(null)
+                .country("USA")
+                .name(null)
+                .build());
+        assertThat(directors2).hasSize(2);
     }
 
     @Test
@@ -101,7 +113,7 @@ public class QueryFilterIT {
         assertThat(directors2).hasSize(2);
     }
 
-    public List<Director> findDirectorInFilmCriteria(Session session, Genre genre, String name, String country) {
+    public List<Director> findDirectorInFilmCriteria(Session session, FilmFilter filter) {
         var filmGraph = session.createEntityGraph(Film.class);
         filmGraph.addAttributeNodes("director");
 
@@ -109,21 +121,13 @@ public class QueryFilterIT {
         var criteria = cb.createQuery(Film.class);
         var film = criteria.from(Film.class);
 
-        List<Predicate> predicates = new ArrayList<>();
+        var predicate = CPredicate.builder()
+                .add(cb, film.get(Film_.GENRE), filter.getGenre())
+                .add(cb, film.get(Film_.NAME), filter.getName())
+                .add(cb, film.get(Film_.COUNTRY), filter.getCountry())
+                .buildOr();
 
-        if (genre != null) {
-            predicates.add(cb.equal(film.get(Film_.GENRE), genre));
-        }
-        if (name != null) {
-            predicates.add(cb.equal(film.get(Film_.NAME), name));
-        }
-        if (country != null) {
-            predicates.add(cb.equal(film.get(Film_.COUNTRY), country));
-        }
-
-        criteria.select(film).where(
-                predicates.toArray(Predicate[]::new)
-        );
+        criteria.select(film).where((Predicate) predicate);
 
         var films = session.createQuery(criteria)
                 .setHint(GraphSemantic.FETCH.getJakartaHintName(), filmGraph)

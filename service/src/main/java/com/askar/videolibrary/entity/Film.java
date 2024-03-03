@@ -27,7 +27,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(exclude = {"director", "filmActors"})
-@EqualsAndHashCode(of = {"director", "filmActors"})
+@EqualsAndHashCode(exclude = {"director", "filmActors"})
 @Builder
 @Entity
 public class Film {

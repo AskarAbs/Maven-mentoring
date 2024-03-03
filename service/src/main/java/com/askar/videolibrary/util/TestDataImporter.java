@@ -127,7 +127,7 @@ public class TestDataImporter {
                 .text(text)
                 .evaluation(evaluation)
                 .build();
-        session.save(review);
+        session.persist(review);
         return review;
     }
 
@@ -142,7 +142,7 @@ public class TestDataImporter {
                 .actorRole(actorRole)
                 .fee(fee)
                 .build();
-        session.save(filmActor);
+        session.persist(filmActor);
         return filmActor;
     }
 
@@ -163,7 +163,7 @@ public class TestDataImporter {
                 .description(description)
                 .director(director)
                 .build();
-        session.save(film);
+        session.persist(film);
 
         return film;
     }
@@ -175,7 +175,7 @@ public class TestDataImporter {
                 .fullName(fullName)
                 .birthday(birthday)
                 .build();
-        session.save(director);
+        session.persist(director);
         return director;
     }
 
@@ -186,7 +186,7 @@ public class TestDataImporter {
                 .fullName(fullName)
                 .birthday(birthday)
                 .build();
-        session.save(actor);
+        session.persist(actor);
         return actor;
     }
 
@@ -201,7 +201,7 @@ public class TestDataImporter {
                 .password(password)
                 .role(role)
                 .build();
-        session.save(user);
+        session.persist(user);
         return user;
     }
 }

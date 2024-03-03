@@ -22,7 +22,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(exclude = {"actor","film"})
-@EqualsAndHashCode(of = {"actor","film"})
+@EqualsAndHashCode(exclude = {"actor","film"})
 @Builder
 @Entity
 @Table(name = "film_actor")

@@ -20,7 +20,7 @@ import java.time.Instant;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(exclude = {"user", "film"})
-@EqualsAndHashCode(of = {"user", "film"})
+@EqualsAndHashCode(exclude = {"user", "film"})
 @Builder
 @Entity
 public class Review {

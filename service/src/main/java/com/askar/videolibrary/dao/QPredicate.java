@@ -25,6 +25,13 @@ public class QPredicate {
         return this;
     }
 
+    public <T> QPredicate add(List<T> object, Function<List<T>, Predicate> function){
+        if (!object.isEmpty()) {
+            predicates.add(function.apply(object));
+        }
+        return this;
+    }
+
     public Predicate buildOr() {
         return ExpressionUtils.anyOf(predicates);
     }

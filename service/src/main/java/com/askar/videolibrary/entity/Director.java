@@ -21,7 +21,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(exclude = "films")
-@EqualsAndHashCode(of = "films")
+@EqualsAndHashCode(exclude = "films")
 @Builder
 @Entity
 public class Director {
