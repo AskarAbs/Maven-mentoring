@@ -10,7 +10,6 @@ import com.askar.videolibrary.entity.enums.Genre;
 import com.askar.videolibrary.util.HibernateTestUtil;
 import com.askar.videolibrary.util.TestDataImporter;
 import com.querydsl.jpa.impl.JPAQuery;
-import jakarta.persistence.criteria.Predicate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.graph.GraphSemantic;
@@ -55,7 +54,7 @@ public class QueryFilterIT {
 
     @Test
     void checkFindDirectorInFilmWhereGenreIsNullCriteria() {
-        var directors2 = findDirectorInFilmQuerydsl(session, FilmFilter.builder()
+        var directors2 = findDirectorInFilmCriteria(session, FilmFilter.builder()
                 .genre(Genre.ADVENTURES)
                 .country(null)
                 .name(null)
@@ -65,7 +64,7 @@ public class QueryFilterIT {
 
     @Test
     void checkFindDirectorInFilmWhereNameIsNullCriteria() {
-        var directors2 = findDirectorInFilmQuerydsl(session, FilmFilter.builder()
+        var directors2 = findDirectorInFilmCriteria(session, FilmFilter.builder()
                 .genre(null)
                 .country(null)
                 .name("Iron Man")
@@ -75,7 +74,7 @@ public class QueryFilterIT {
 
     @Test
     void checkFindDirectorInFilmWhereCountryIsNullCriteria() {
-        var directors2 = findDirectorInFilmQuerydsl(session, FilmFilter.builder()
+        var directors2 = findDirectorInFilmCriteria(session, FilmFilter.builder()
                 .genre(null)
                 .country("USA")
                 .name(null)
@@ -127,7 +126,7 @@ public class QueryFilterIT {
                 .add(cb, film.get(Film_.COUNTRY), filter.getCountry())
                 .buildOr();
 
-        criteria.select(film).where((Predicate) predicate);
+        criteria.select(film).where(predicate);
 
         var films = session.createQuery(criteria)
                 .setHint(GraphSemantic.FETCH.getJakartaHintName(), filmGraph)
