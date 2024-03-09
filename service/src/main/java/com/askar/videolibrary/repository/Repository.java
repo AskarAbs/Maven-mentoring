@@ -1,4 +1,4 @@
-package com.askar.videolibrary.dao;
+package com.askar.videolibrary.repository;
 
 import com.askar.videolibrary.entity.BaseEntity;
 
@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
-public interface Dao<K extends Serializable, E extends BaseEntity<K>> {
+public interface Repository<K extends Serializable, E extends BaseEntity<K>> {
 
     E save(E entity);
 

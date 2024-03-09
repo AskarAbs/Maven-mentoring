@@ -1,4 +1,4 @@
-package com.askar.videolibrary.dao;
+package com.askar.videolibrary.repository;
 
 import com.askar.videolibrary.entity.BaseEntity;
 import jakarta.persistence.EntityManager;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
-public abstract class BaseDao<K extends Serializable, E extends BaseEntity<K>> implements Dao<K, E> {
+public abstract class BaseRepository<K extends Serializable, E extends BaseEntity<K>> implements Repository<K, E> {
 
     private final Class<E> clazz;
     private final EntityManager entityManager;
@@ -21,11 +21,13 @@ public abstract class BaseDao<K extends Serializable, E extends BaseEntity<K>> i
 
     public void delete(E entity) {
         entityManager.remove(entity);
+        entityManager.flush();
     }
 
     @Override
     public void update(E entity) {
         entityManager.merge(entity);
+        entityManager.flush();
     }
 
     @Override

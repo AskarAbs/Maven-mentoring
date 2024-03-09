@@ -1,4 +1,4 @@
-package com.askar.videolibrary.dao.filter;
+package com.askar.videolibrary.repository.filter;
 
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.Expression;

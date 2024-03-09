@@ -1,4 +1,4 @@
-package com.askar.videolibrary.dao.filter;
+package com.askar.videolibrary.repository.filter;
 
 import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.Predicate;

@@ -1,5 +1,6 @@
 package com.askar.videolibrary.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -37,7 +38,7 @@ public class Director implements BaseEntity<Long>{
     private LocalDate birthday;
 
     @Builder.Default
-    @OneToMany(mappedBy = "director")
+    @OneToMany(mappedBy = "director", cascade = CascadeType.REMOVE)
     private List<Film> films = new ArrayList<>();
 
     public void addFilm(Film film) {

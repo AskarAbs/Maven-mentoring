@@ -1,7 +1,7 @@
 package com.askar.videolibrary.entityCrud;
 
-import com.askar.videolibrary.dao.filter.CPredicate;
-import com.askar.videolibrary.dao.filter.QPredicate;
+import com.askar.videolibrary.repository.filter.CPredicate;
+import com.askar.videolibrary.repository.filter.QPredicate;
 import com.askar.videolibrary.dto.FilmFilter;
 import com.askar.videolibrary.entity.Director;
 import com.askar.videolibrary.entity.Film;

@@ -1,6 +1,6 @@
-package com.askar.videolibrary.dao;
+package com.askar.videolibrary.repository;
 
-import com.askar.videolibrary.dao.filter.QPredicate;
+import com.askar.videolibrary.repository.filter.QPredicate;
 import com.askar.videolibrary.dto.FilmFilter;
 import com.askar.videolibrary.entity.Film;
 import com.querydsl.jpa.impl.JPAQuery;
@@ -11,8 +11,9 @@ import java.util.List;
 
 import static com.askar.videolibrary.entity.QFilm.film;
 
-public class FilmDao extends BaseDao<Long, Film> {
-    public FilmDao(EntityManager entityManager) {
+public class FilmRepository extends BaseRepository<Long, Film> {
+
+    public FilmRepository(EntityManager entityManager) {
         super(Film.class, entityManager);
     }
 

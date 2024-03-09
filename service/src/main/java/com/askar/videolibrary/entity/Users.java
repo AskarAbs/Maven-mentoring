@@ -1,6 +1,7 @@
 package com.askar.videolibrary.entity;
 
 import com.askar.videolibrary.entity.enums.Role;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -42,7 +43,7 @@ public class Users implements BaseEntity<Long>{
     private Role role;
 
     @Builder.Default
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Review> reviews = new ArrayList<>();
 
     public void addReview(Review review) {
