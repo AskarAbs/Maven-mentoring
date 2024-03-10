@@ -4,13 +4,22 @@ import com.askar.videolibrary.dto.FilmFilter;
 import com.askar.videolibrary.entity.Director;
 import com.askar.videolibrary.entity.Film;
 import com.askar.videolibrary.entity.enums.Genre;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
 import java.time.LocalDate;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class FilmRepositoryIT extends IntegrationTestBase{
+public class FilmRepositoryIT extends IntegrationTestBase {
 
     private static final Long FILM_ID = 1L;
+    private static FilmRepository filmRepository;
+
+    @BeforeAll
+    static void initActor() {
+        filmRepository = context.getBean("filmRepository", FilmRepository.class);
+    }
 
     @Test
     void findAllWithFilterWhereNameIsNotNull() {

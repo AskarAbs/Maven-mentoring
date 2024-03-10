@@ -3,7 +3,7 @@ package services;
 
 import com.askar.videolibrary.entity.Users;
 import com.askar.videolibrary.entity.enums.Role;
-import com.askar.videolibrary.util.HibernateTestUtil;
+import com.askar.videolibrary.repository.HibernateTestUtil;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 

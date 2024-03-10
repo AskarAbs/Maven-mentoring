@@ -1,14 +1,23 @@
 package com.askar.videolibrary.repository;
 
 import com.askar.videolibrary.entity.Director;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
 import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class DirectorRepositoryIT extends IntegrationTestBase{
+class DirectorRepositoryIT extends IntegrationTestBase {
 
     private static final Long DIRECTOR_ID = 1L;
+    private static DirectorRepository directorRepository;
+
+    @BeforeAll
+    static void initActor() {
+        directorRepository = context.getBean("directorRepository", DirectorRepository.class);
+    }
+
 
     @Test
     void findAll() {

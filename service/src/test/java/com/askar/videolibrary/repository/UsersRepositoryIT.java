@@ -2,13 +2,20 @@ package com.askar.videolibrary.repository;
 
 import com.askar.videolibrary.entity.Users;
 import com.askar.videolibrary.entity.enums.Role;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class UsersRepositoryIT extends IntegrationTestBase{
+class UsersRepositoryIT extends IntegrationTestBase {
 
     private static final Long USER_ID = 1L;
+    private static UsersRepository userRepository;
+
+    @BeforeAll
+    static void initActor() {
+        userRepository = context.getBean("usersRepository", UsersRepository.class);
+    }
 
     @Test
     void findAll() {

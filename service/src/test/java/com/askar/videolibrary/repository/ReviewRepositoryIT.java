@@ -1,14 +1,22 @@
 package com.askar.videolibrary.repository;
 
 import com.askar.videolibrary.entity.Review;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
 import java.time.Instant;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class ReviewRepositoryIT extends IntegrationTestBase{
+class ReviewRepositoryIT extends IntegrationTestBase {
 
     private static final Long REVIEW_ID = 1L;
+    private static ReviewRepository reviewRepository;
+
+    @BeforeAll
+    static void initActor() {
+        reviewRepository = context.getBean("reviewRepository", ReviewRepository.class);
+    }
 
     @Test
     void findAll() {

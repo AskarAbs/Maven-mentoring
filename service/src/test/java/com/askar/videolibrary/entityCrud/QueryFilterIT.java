@@ -7,7 +7,7 @@ import com.askar.videolibrary.entity.Director;
 import com.askar.videolibrary.entity.Film;
 import com.askar.videolibrary.entity.Film_;
 import com.askar.videolibrary.entity.enums.Genre;
-import com.askar.videolibrary.util.HibernateTestUtil;
+import com.askar.videolibrary.repository.HibernateTestUtil;
 import com.askar.videolibrary.util.TestDataImporter;
 import com.querydsl.jpa.impl.JPAQuery;
 import org.hibernate.Session;

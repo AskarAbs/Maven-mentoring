@@ -9,7 +9,7 @@ import com.askar.videolibrary.entity.Users;
 import com.askar.videolibrary.entity.enums.ActorRole;
 import com.askar.videolibrary.entity.enums.Genre;
 import com.askar.videolibrary.entity.enums.Role;
-import com.askar.videolibrary.util.HibernateTestUtil;
+import com.askar.videolibrary.repository.HibernateTestUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.AfterAll;

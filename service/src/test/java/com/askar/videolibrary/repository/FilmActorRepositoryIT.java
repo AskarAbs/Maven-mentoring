@@ -2,13 +2,20 @@ package com.askar.videolibrary.repository;
 
 import com.askar.videolibrary.entity.FilmActor;
 import com.askar.videolibrary.entity.enums.ActorRole;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class FilmActorRepositoryIT extends IntegrationTestBase{
+class FilmActorRepositoryIT extends IntegrationTestBase {
 
     private static final Long FILM_ACTOR_ID = 1L;
+    private static FilmActorRepository filmActorRepository;
+
+    @BeforeAll
+    static void initActor() {
+        filmActorRepository = context.getBean("filmActorRepository", FilmActorRepository.class);
+    }
 
     @Test
     void findAll() {

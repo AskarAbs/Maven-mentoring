@@ -3,9 +3,9 @@ package com.askar.videolibrary.repository.filter;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.Expression;
 import jakarta.persistence.criteria.Predicate;
+
 import java.util.ArrayList;
 import java.util.List;
-
 public class CPredicate {
 
     private final List<jakarta.persistence.criteria.Predicate> predicates = new ArrayList<>();

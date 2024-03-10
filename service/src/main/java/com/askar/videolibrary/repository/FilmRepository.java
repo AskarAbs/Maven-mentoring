@@ -6,11 +6,12 @@ import com.askar.videolibrary.entity.Film;
 import com.querydsl.jpa.impl.JPAQuery;
 import jakarta.persistence.EntityManager;
 import org.hibernate.graph.GraphSemantic;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 import static com.askar.videolibrary.entity.QFilm.film;
-
+@Repository
 public class FilmRepository extends BaseRepository<Long, Film> {
 
     public FilmRepository(EntityManager entityManager) {

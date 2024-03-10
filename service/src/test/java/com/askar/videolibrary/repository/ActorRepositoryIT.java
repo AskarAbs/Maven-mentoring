@@ -1,14 +1,23 @@
 package com.askar.videolibrary.repository;
 
 import com.askar.videolibrary.entity.Actor;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
 import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class ActorRepositoryIT extends IntegrationTestBase{
+class ActorRepositoryIT extends IntegrationTestBase {
 
     private static final Long ACTOR_ID = 1L;
+    private static ActorRepository actorRepository;
+
+    @BeforeAll
+    static void initActor() {
+        actorRepository = context.getBean("actorRepository", ActorRepository.class);
+    }
+
     @Test
     void findAll() {
         var actors = actorRepository.findAll();
