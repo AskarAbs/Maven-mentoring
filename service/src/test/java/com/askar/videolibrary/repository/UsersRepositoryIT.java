@@ -2,20 +2,15 @@ package com.askar.videolibrary.repository;
 
 import com.askar.videolibrary.entity.Users;
 import com.askar.videolibrary.entity.enums.Role;
-import org.junit.jupiter.api.BeforeAll;
+import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@RequiredArgsConstructor
 class UsersRepositoryIT extends IntegrationTestBase {
 
-    private static final Long USER_ID = 1L;
-    private static UsersRepository userRepository;
-
-    @BeforeAll
-    static void initActor() {
-        userRepository = context.getBean("usersRepository", UsersRepository.class);
-    }
+    private final UsersRepository userRepository;
 
     @Test
     void findAll() {
@@ -36,34 +31,43 @@ class UsersRepositoryIT extends IntegrationTestBase {
 
     @Test
     void update() {
-        var user = userRepository.findById(USER_ID);
+        var createdUser = createUser();
+        var savedUser = userRepository.save(createdUser);
+
+        var user = userRepository.findById(savedUser.getId());
         assertThat(user).isPresent();
         user.ifPresent(users -> users.setUsername("Monkey"));
 
-        user.ifPresent(users -> userRepository.update(users));
+        user.ifPresent(userRepository::update);
         entityManager.flush();
         var actualUser = userRepository.findById(user.get().getId());
 
         assertThat(actualUser).isPresent();
         assertThat(actualUser.get().getUsername()).isEqualTo("Monkey");
-        assertThat(actualUser.get().getId()).isEqualTo(USER_ID);
+        assertThat(actualUser.get().getId()).isEqualTo(savedUser.getId());
     }
 
     @Test
     void delete() {
-        var user = userRepository.findById(USER_ID);
+        var createdUser = createUser();
+        var savedUser = userRepository.save(createdUser);
 
-        user.ifPresent(value -> userRepository.delete(value));
+        var user = userRepository.findById(savedUser.getId());
 
-        assertThat(userRepository.findById(USER_ID)).isEmpty();
+        user.ifPresent(userRepository::delete);
+
+        assertThat(userRepository.findById(savedUser.getId())).isEmpty();
     }
 
     @Test
     void findById() {
-        var user = userRepository.findById(USER_ID);
+        var createdUser = createUser();
+        var savedUser = userRepository.save(createdUser);
+
+        var user = userRepository.findById(savedUser.getId());
 
         assertThat(user).isPresent();
-        assertThat(user.get().getId()).isEqualTo(USER_ID);
+        assertThat(user.get().getId()).isEqualTo(savedUser.getId());
     }
 
     public Users createUser() {

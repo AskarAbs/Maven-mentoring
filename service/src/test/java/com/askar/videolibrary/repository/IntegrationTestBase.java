@@ -1,43 +1,34 @@
 package com.askar.videolibrary.repository;
 
-import com.askar.videolibrary.config.TestApplicationConfiguration;
+import com.askar.videolibrary.annotation.IT;
 import com.askar.videolibrary.util.TestDataImporter;
 import jakarta.persistence.EntityManager;
-import org.hibernate.SessionFactory;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
+import org.testcontainers.containers.PostgreSQLContainer;
 
+@IT
 public abstract class IntegrationTestBase {
 
-    protected static AnnotationConfigApplicationContext context;
-    private static SessionFactory sessionFactory;
+    @Autowired
     protected EntityManager entityManager;
+    private static final PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16");
 
-    @BeforeAll
-    static void initSessionFactory() {
-        context = new AnnotationConfigApplicationContext(TestApplicationConfiguration.class);
-        sessionFactory = context.getBean("sessionFactory", SessionFactory.class);
-        TestDataImporter.importData(sessionFactory);
+    static {
+        postgres.start();
     }
 
     @BeforeEach
     void openSession() {
-        entityManager = context.getBean("entityManager", EntityManager.class);
-        entityManager.getTransaction().begin();
+        TestDataImporter.importData(entityManager);
     }
 
-    @AfterEach
-    void closeSession() {
-        entityManager.getTransaction().rollback();
+    @DynamicPropertySource
+    static void buildEntityManagerFactory(DynamicPropertyRegistry propertyRegistry) {
+        propertyRegistry.add("spring.datasource.url", postgres::getJdbcUrl);
+        propertyRegistry.add("spring.datasource.username", postgres::getUsername);
+        propertyRegistry.add("spring.datasource.password", postgres::getPassword);
     }
-
-    @AfterAll
-    static void closeSessionFactory() {
-        sessionFactory.close();
-        context.close();
-    }
-
 }

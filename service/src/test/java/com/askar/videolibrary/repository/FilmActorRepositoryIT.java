@@ -2,20 +2,15 @@ package com.askar.videolibrary.repository;
 
 import com.askar.videolibrary.entity.FilmActor;
 import com.askar.videolibrary.entity.enums.ActorRole;
-import org.junit.jupiter.api.BeforeAll;
+import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@RequiredArgsConstructor
 class FilmActorRepositoryIT extends IntegrationTestBase {
 
-    private static final Long FILM_ACTOR_ID = 1L;
-    private static FilmActorRepository filmActorRepository;
-
-    @BeforeAll
-    static void initActor() {
-        filmActorRepository = context.getBean("filmActorRepository", FilmActorRepository.class);
-    }
+    private final FilmActorRepository filmActorRepository;
 
     @Test
     void findAll() {
@@ -36,34 +31,43 @@ class FilmActorRepositoryIT extends IntegrationTestBase {
 
     @Test
     void update() {
-        var filmActor = filmActorRepository.findById(FILM_ACTOR_ID);
+        var createdFilmActor = createfilmActor();
+        var savedFilmActor = filmActorRepository.save(createdFilmActor);
+
+        var filmActor = filmActorRepository.findById(savedFilmActor.getId());
         assertThat(filmActor).isPresent();
         filmActor.ifPresent(filmActors -> filmActors.setFee(400L));
 
-        filmActor.ifPresent(filmActors -> filmActorRepository.update(filmActors));
+        filmActor.ifPresent(filmActorRepository::update);
         entityManager.flush();
         var actualFilmActors = filmActorRepository.findById(filmActor.get().getId());
 
         assertThat(actualFilmActors).isPresent();
         assertThat(actualFilmActors.get().getFee()).isEqualTo(400L);
-        assertThat(actualFilmActors.get().getId()).isEqualTo(FILM_ACTOR_ID);
+        assertThat(actualFilmActors.get().getId()).isEqualTo(savedFilmActor.getId());
     }
 
     @Test
     void delete() {
-        var filmActor = filmActorRepository.findById(FILM_ACTOR_ID);
+        var createdFilmActor = createfilmActor();
+        var savedFilmActor = filmActorRepository.save(createdFilmActor);
 
-        filmActor.ifPresent(value -> filmActorRepository.delete(value));
+        var filmActor = filmActorRepository.findById(savedFilmActor.getId());
 
-        assertThat(filmActorRepository.findById(FILM_ACTOR_ID)).isEmpty();
+        filmActor.ifPresent(filmActorRepository::delete);
+
+        assertThat(filmActorRepository.findById(savedFilmActor.getId())).isEmpty();
     }
 
     @Test
     void findById() {
-        var filmActor = filmActorRepository.findById(FILM_ACTOR_ID);
+        var createdFilmActor = createfilmActor();
+        var savedFilmActor = filmActorRepository.save(createdFilmActor);
+
+        var filmActor = filmActorRepository.findById(savedFilmActor.getId());
 
         assertThat(filmActor).isPresent();
-        assertThat(filmActor.get().getId()).isEqualTo(FILM_ACTOR_ID);
+        assertThat(filmActor.get().getId()).isEqualTo(savedFilmActor.getId());
     }
 
     public FilmActor createfilmActor() {

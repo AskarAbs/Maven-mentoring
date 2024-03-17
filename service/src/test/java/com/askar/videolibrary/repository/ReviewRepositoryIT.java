@@ -1,22 +1,17 @@
 package com.askar.videolibrary.repository;
 
 import com.askar.videolibrary.entity.Review;
-import org.junit.jupiter.api.BeforeAll;
+import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 
 import java.time.Instant;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@RequiredArgsConstructor
 class ReviewRepositoryIT extends IntegrationTestBase {
 
-    private static final Long REVIEW_ID = 1L;
-    private static ReviewRepository reviewRepository;
-
-    @BeforeAll
-    static void initActor() {
-        reviewRepository = context.getBean("reviewRepository", ReviewRepository.class);
-    }
+    private final ReviewRepository reviewRepository;
 
     @Test
     void findAll() {
@@ -37,34 +32,42 @@ class ReviewRepositoryIT extends IntegrationTestBase {
 
     @Test
     void update() {
-        var review = reviewRepository.findById(REVIEW_ID);
+        var createdReview = createReview();
+        var savedReview = reviewRepository.save(createdReview);
+
+        var review = reviewRepository.findById(savedReview.getId());
         assertThat(review).isPresent();
         review.ifPresent(reviews -> reviews.setEvaluation(1));
 
-        review.ifPresent(reviews -> reviewRepository.update(reviews));
+        review.ifPresent(reviewRepository::update);
         entityManager.flush();
         var actualReview = reviewRepository.findById(review.get().getId());
 
         assertThat(actualReview).isPresent();
         assertThat(actualReview.get().getEvaluation()).isEqualTo(1);
-        assertThat(actualReview.get().getId()).isEqualTo(REVIEW_ID);
+        assertThat(actualReview.get().getId()).isEqualTo(savedReview.getId());
     }
 
     @Test
     void delete() {
-        var review = reviewRepository.findById(REVIEW_ID);
+        var createdReview = createReview();
+        var savedReview = reviewRepository.save(createdReview);
+        var review = reviewRepository.findById(savedReview.getId());
 
-        review.ifPresent(value -> reviewRepository.delete(value));
+        review.ifPresent(reviewRepository::delete);
 
-        assertThat(reviewRepository.findById(REVIEW_ID)).isEmpty();
+        assertThat(reviewRepository.findById(savedReview.getId())).isEmpty();
     }
 
     @Test
     void findById() {
-        var review = reviewRepository.findById(REVIEW_ID);
+        var createdReview = createReview();
+        var savedReview = reviewRepository.save(createdReview);
+
+        var review = reviewRepository.findById(savedReview.getId());
 
         assertThat(review).isPresent();
-        assertThat(review.get().getId()).isEqualTo(REVIEW_ID);
+        assertThat(review.get().getId()).isEqualTo(savedReview.getId());
     }
 
     public Review createReview() {

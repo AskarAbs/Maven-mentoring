@@ -1,23 +1,17 @@
 package com.askar.videolibrary.repository;
 
 import com.askar.videolibrary.entity.Director;
-import org.junit.jupiter.api.BeforeAll;
+import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@RequiredArgsConstructor
 class DirectorRepositoryIT extends IntegrationTestBase {
 
-    private static final Long DIRECTOR_ID = 1L;
-    private static DirectorRepository directorRepository;
-
-    @BeforeAll
-    static void initActor() {
-        directorRepository = context.getBean("directorRepository", DirectorRepository.class);
-    }
-
+    private final DirectorRepository directorRepository;
 
     @Test
     void findAll() {
@@ -38,34 +32,41 @@ class DirectorRepositoryIT extends IntegrationTestBase {
 
     @Test
     void update() {
-        var director = directorRepository.findById(DIRECTOR_ID);
+        var createdDirector = createDirector();
+        var savedDirector = directorRepository.save(createdDirector);
+
+        var director = directorRepository.findById(savedDirector.getId());
         assertThat(director).isPresent();
         director.ifPresent(director1 -> director1.setFullName("ivan"));
 
-        director.ifPresent(director1 -> directorRepository.update(director1));
+        director.ifPresent(directorRepository::update);
         entityManager.flush();
         var actualDirector = directorRepository.findById(director.get().getId());
 
         assertThat(actualDirector).isPresent();
         assertThat(actualDirector.get().getFullName()).isEqualTo("ivan");
-        assertThat(actualDirector.get().getId()).isEqualTo(DIRECTOR_ID);
+        assertThat(actualDirector.get().getId()).isEqualTo(savedDirector.getId());
     }
 
     @Test
     void delete() {
-        var director = directorRepository.findById(DIRECTOR_ID);
+        var createdDirector = createDirector();
+        var savedDirector = directorRepository.save(createdDirector);
+        var director = directorRepository.findById(savedDirector.getId());
 
-        director.ifPresent(value -> directorRepository.delete(value));
+        director.ifPresent(directorRepository::delete);
 
-        assertThat(directorRepository.findById(DIRECTOR_ID)).isEmpty();
+        assertThat(directorRepository.findById(savedDirector.getId())).isEmpty();
     }
 
     @Test
     void findById() {
-        var director = directorRepository.findById(DIRECTOR_ID);
+        var createdDirector = createDirector();
+        var savedDirector = directorRepository.save(createdDirector);
+        var director = directorRepository.findById(savedDirector.getId());
 
         assertThat(director).isPresent();
-        assertThat(director.get().getId()).isEqualTo(DIRECTOR_ID);
+        assertThat(director.get().getId()).isEqualTo(savedDirector.getId());
     }
 
     public Director createDirector() {

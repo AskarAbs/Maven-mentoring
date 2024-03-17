@@ -1,27 +1,21 @@
 package com.askar.videolibrary.repository;
 
 import com.askar.videolibrary.entity.Actor;
-import org.junit.jupiter.api.BeforeAll;
+import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@RequiredArgsConstructor
 class ActorRepositoryIT extends IntegrationTestBase {
 
-    private static final Long ACTOR_ID = 1L;
-    private static ActorRepository actorRepository;
-
-    @BeforeAll
-    static void initActor() {
-        actorRepository = context.getBean("actorRepository", ActorRepository.class);
-    }
+    private final ActorRepository actorRepository;
 
     @Test
     void findAll() {
         var actors = actorRepository.findAll();
-
         assertThat(actors).hasSize(4);
     }
 
@@ -37,7 +31,10 @@ class ActorRepositoryIT extends IntegrationTestBase {
 
     @Test
     void update() {
-        var actor = actorRepository.findById(ACTOR_ID);
+        var createdActor = createActor();
+        var savedActor = actorRepository.save(createdActor);
+
+        var actor = actorRepository.findById(savedActor.getId());
         assertThat(actor).isPresent();
         actor.ifPresent(actor1 -> actor1.setFullName("ivan"));
 
@@ -47,7 +44,7 @@ class ActorRepositoryIT extends IntegrationTestBase {
 
         assertThat(actualActor).isPresent();
         assertThat(actualActor.get().getFullName()).isEqualTo("ivan");
-        assertThat(actualActor.get().getId()).isEqualTo(ACTOR_ID);
+        assertThat(actualActor.get().getId()).isEqualTo(savedActor.getId());
     }
 
     @Test
@@ -61,10 +58,13 @@ class ActorRepositoryIT extends IntegrationTestBase {
 
     @Test
     void findById() {
-        var actor = actorRepository.findById(ACTOR_ID);
+        var createdActor = createActor();
+        var savedActor = actorRepository.save(createdActor);
+
+        var actor = actorRepository.findById(savedActor.getId());
 
         assertThat(actor).isPresent();
-        assertThat(actor.get().getId()).isEqualTo(ACTOR_ID);
+        assertThat(actor.get().getId()).isEqualTo(savedActor.getId());
     }
 
     public Actor createActor() {

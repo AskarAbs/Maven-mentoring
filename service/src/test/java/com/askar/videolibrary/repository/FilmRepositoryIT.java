@@ -4,22 +4,17 @@ import com.askar.videolibrary.dto.FilmFilter;
 import com.askar.videolibrary.entity.Director;
 import com.askar.videolibrary.entity.Film;
 import com.askar.videolibrary.entity.enums.Genre;
-import org.junit.jupiter.api.BeforeAll;
+import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@RequiredArgsConstructor
 public class FilmRepositoryIT extends IntegrationTestBase {
 
-    private static final Long FILM_ID = 1L;
-    private static FilmRepository filmRepository;
-
-    @BeforeAll
-    static void initActor() {
-        filmRepository = context.getBean("filmRepository", FilmRepository.class);
-    }
+    private final FilmRepository filmRepository;
 
     @Test
     void findAllWithFilterWhereNameIsNotNull() {
@@ -73,34 +68,52 @@ public class FilmRepositoryIT extends IntegrationTestBase {
 
     @Test
     void update() {
-        var film = filmRepository.findById(FILM_ID);
+        var director = createDirector();
+        var film2 = createFilm();
+        film2.setDirector(director);
+        entityManager.persist(director);
+        var createdFilm = filmRepository.save(film2);
+
+        var film = filmRepository.findById(createdFilm.getId());
         assertThat(film).isPresent();
         film.ifPresent(film1 -> film1.setName("doctor"));
 
-        film.ifPresent(film1 -> filmRepository.update(film1));
+        film.ifPresent(filmRepository::update);
         entityManager.flush();
         var actualFilm = filmRepository.findById(film.get().getId());
 
         assertThat(actualFilm).isPresent();
         assertThat(actualFilm.get().getName()).isEqualTo("doctor");
-        assertThat(actualFilm.get().getId()).isEqualTo(FILM_ID);
+        assertThat(actualFilm.get().getId()).isEqualTo(createdFilm.getId());
     }
 
     @Test
     void delete() {
-        var film = filmRepository.findById(FILM_ID);
+        var director = createDirector();
+        var film2 = createFilm();
+        film2.setDirector(director);
+        entityManager.persist(director);
+        var createdFilm = filmRepository.save(film2);
 
-        film.ifPresent(value -> filmRepository.delete(value));
+        var actualFilm = filmRepository.findById(createdFilm.getId());
 
-        assertThat(filmRepository.findById(1L)).isEmpty();
+        actualFilm.ifPresent(filmRepository::delete);
+
+        assertThat(filmRepository.findById(createdFilm.getId())).isEmpty();
     }
 
     @Test
     void findById() {
-        var film = filmRepository.findById(FILM_ID);
+        var director = createDirector();
+        var film2 = createFilm();
+        film2.setDirector(director);
+        entityManager.persist(director);
+        var createdFilm = filmRepository.save(film2);
+
+        var film = filmRepository.findById(createdFilm.getId());
 
         assertThat(film).isPresent();
-        assertThat(film.get().getId()).isEqualTo(FILM_ID);
+        assertThat(film.get().getId()).isEqualTo(createdFilm.getId());
     }
 
     public Director createDirector() {

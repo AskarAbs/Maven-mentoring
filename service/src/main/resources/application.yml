@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: postgres
+    url: jdbc:postgresql://localhost:5432/films
+  jpa:
+    properties:
+        hibernate:
+          current_session_context_class: thread
+          show_sql: true
+          format_sql: true
+          hbm2ddl.auto: validate
+          connection:
+            pool_size: 12
