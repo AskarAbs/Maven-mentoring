@@ -1,13 +1,8 @@
 package com.askar.videolibrary.repository;
 
 import com.askar.videolibrary.entity.Actor;
-import jakarta.persistence.EntityManager;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@Repository
-public class ActorRepository extends BaseRepository<Long, Actor> {
+public interface ActorRepository extends JpaRepository<Actor, Long> {
 
-    public ActorRepository(EntityManager entityManager) {
-        super(Actor.class, entityManager);
-    }
 }

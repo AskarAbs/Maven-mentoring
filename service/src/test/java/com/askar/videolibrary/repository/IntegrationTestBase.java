@@ -12,9 +12,16 @@ import org.testcontainers.containers.PostgreSQLContainer;
 @IT
 public abstract class IntegrationTestBase {
 
-    @Autowired
-    protected EntityManager entityManager;
     private static final PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16");
+    @Autowired
+    private EntityManager entityManager;
+
+    @DynamicPropertySource
+    static void buildEntityManagerFactory(DynamicPropertyRegistry propertyRegistry) {
+        propertyRegistry.add("spring.datasource.url", postgres::getJdbcUrl);
+        propertyRegistry.add("spring.datasource.username", postgres::getUsername);
+        propertyRegistry.add("spring.datasource.password", postgres::getPassword);
+    }
 
     static {
         postgres.start();
@@ -23,12 +30,5 @@ public abstract class IntegrationTestBase {
     @BeforeEach
     void openSession() {
         TestDataImporter.importData(entityManager);
-    }
-
-    @DynamicPropertySource
-    static void buildEntityManagerFactory(DynamicPropertyRegistry propertyRegistry) {
-        propertyRegistry.add("spring.datasource.url", postgres::getJdbcUrl);
-        propertyRegistry.add("spring.datasource.username", postgres::getUsername);
-        propertyRegistry.add("spring.datasource.password", postgres::getPassword);
     }
 }

@@ -1,13 +1,8 @@
 package com.askar.videolibrary.repository;
 
 import com.askar.videolibrary.entity.Users;
-import jakarta.persistence.EntityManager;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@Repository
-public class UsersRepository extends BaseRepository<Long, Users> {
+public interface UsersRepository extends JpaRepository<Users,Long> {
 
-    public UsersRepository(EntityManager entityManager) {
-        super(Users.class, entityManager);
-    }
 }

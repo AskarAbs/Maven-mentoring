@@ -1,5 +1,6 @@
 package com.askar.videolibrary.entity;
 
+import com.askar.videolibrary.entity.audit.EntityAudit;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -23,7 +24,7 @@ import java.time.Instant;
 @EqualsAndHashCode(exclude = {"user", "film"})
 @Builder
 @Entity
-public class Review implements BaseEntity<Long>{
+public class Review extends EntityAudit<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

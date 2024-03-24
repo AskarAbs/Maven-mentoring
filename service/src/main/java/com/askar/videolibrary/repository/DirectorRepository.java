@@ -1,13 +1,8 @@
 package com.askar.videolibrary.repository;
 
 import com.askar.videolibrary.entity.Director;
-import jakarta.persistence.EntityManager;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@Repository
-public class DirectorRepository extends BaseRepository<Long, Director> {
+public interface DirectorRepository extends JpaRepository<Director, Long> {
 
-    public DirectorRepository(EntityManager entityManager) {
-        super(Director.class, entityManager);
-    }
 }

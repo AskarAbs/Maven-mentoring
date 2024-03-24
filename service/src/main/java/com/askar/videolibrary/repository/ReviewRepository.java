@@ -1,13 +1,8 @@
 package com.askar.videolibrary.repository;
 
 import com.askar.videolibrary.entity.Review;
-import jakarta.persistence.EntityManager;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@Repository
-public class ReviewRepository extends BaseRepository<Long, Review> {
+public interface ReviewRepository extends JpaRepository<Review,Long> {
 
-    public ReviewRepository(EntityManager entityManager) {
-        super(Review.class, entityManager);
-    }
 }

@@ -7,7 +7,6 @@ spring:
   jpa:
     properties:
         hibernate:
-          current_session_context_class: thread
           show_sql: true
           format_sql: true
           hbm2ddl.auto: validate

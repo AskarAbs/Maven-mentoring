@@ -1,5 +1,6 @@
 package com.askar.videolibrary.entity;
 
+import com.askar.videolibrary.entity.audit.EntityAudit;
 import com.askar.videolibrary.entity.enums.Role;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -23,7 +24,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-public class Users implements BaseEntity<Long>{
+public class Users extends EntityAudit<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
