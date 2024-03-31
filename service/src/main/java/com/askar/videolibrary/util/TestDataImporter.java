@@ -66,6 +66,21 @@ public class TestDataImporter {
                 "123",
                 "ivan",
                 Role.USER);
+        Users petr = saveUser(entityManager,
+                "petr@gmail.com",
+                "321",
+                "petr",
+                Role.USER);
+        Users sveta = saveUser(entityManager,
+                "sveta@gmail.com",
+                "111",
+                "sveta",
+                Role.USER);
+        Users kolya = saveUser(entityManager,
+                "kolya@gmail.com",
+                "222",
+                "kolya",
+                Role.USER);
 
         Review askarReview = saveReview(entityManager,
                 ironMan,

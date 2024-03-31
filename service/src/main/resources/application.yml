@@ -12,3 +12,4 @@ spring:
           hbm2ddl.auto: validate
           connection:
             pool_size: 12
+    open-in-view: false

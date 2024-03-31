@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User List</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 32px;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group a {
+            display: block;
+            text-decoration: none;
+            color: #333;
+            font-size: 18px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f4f4f4;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-group a:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+<h1>Users</h1>
+<div th:each="user : ${users}">
+    <div class="form-group">
+        <a th:href="@{'/users/'+ ${user.id}}" th:text="${user.email}">User</a>
+    </div>
+</div>
+</body>
+</html>
