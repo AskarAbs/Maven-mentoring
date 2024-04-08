@@ -59,7 +59,6 @@ public class FilmService {
                 .map(filmReadMapper::map)
                 .orElseThrow();
     }
-
     public Optional<byte[]> findAvatar(Long id) {
         return filmRepository.findById(id)
                 .map(Film::getImage)
@@ -75,9 +74,12 @@ public class FilmService {
     }
 
     @Transactional
-    public Optional<FilmReadDto> update(Long id, FilmCreateEditDto film) {
+    public Optional<FilmReadDto> update(Long id, FilmCreateEditDto dto) {
         return filmRepository.findById(id)
-                .map(entity -> filmCreateEditMapper.map(film, entity))
+                .map(film -> {
+                    uploadImage(dto.getImage());
+                    return filmCreateEditMapper.map(dto,film);
+                })
                 .map(filmRepository::saveAndFlush)
                 .map(filmReadMapper::map);
     }
