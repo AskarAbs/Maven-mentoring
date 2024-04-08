@@ -58,6 +58,8 @@ public class Film implements BaseEntity<Long>{
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Director director;
 
+    private String image;
+
     @Builder.Default
     @OneToMany(mappedBy = "film", cascade = CascadeType.REMOVE)
     private List<FilmActor> filmActors = new ArrayList<>();

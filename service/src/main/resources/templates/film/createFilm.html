@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Films</title>
+</head>
+<body>
+<div class="container">
+    <h2>Refactor film</h2>
+    <form th:action="@{/films}" method="post">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name">
+        </div>
+        <div class="form-group">
+            <label for="releaseDate">Release Date:</label>
+            <input type="date" id="releaseDate" name="releaseDate">
+        </div>
+        <div class="form-group">
+            <label for="country">Country:</label>
+            <input type="text" id="country" name="country">
+        </div>
+        <div class="form-group">
+            <label for="genre">Genre:</label>
+            <select id="genre" name="genre">
+                <option th:each="genre : ${genres}" th:value="${genre}"
+                        th:text="${genre}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="trailer">Trailer URL:</label>
+            <input type="url" id="trailer" name="trailer">
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" rows="4"></textarea>
+        </div>
+        <div>
+            <label for="directors">Director:
+                <select id="directors" name="directorId">
+                    <option th:each="director : ${directors}"
+                            th:value="${director.id}"
+                            th:text="${director.fullName}">Director
+                    </option>
+                </select>
+            </label>
+        </div>
+        <button type="submit" class="btn">Create</button>
+    </form>
+    <form action="/directors">
+        <p>
+            <button type="submit" class="btn">Add Director</button>
+        </p>
+    </form>
+    <div th:if="${errors}">
+        <p style="color: red" th:each="error : ${errors}" th:text="${error.defaultMessage}">Error message</p>
+    </div>
+</div>
+</body>
+</html>

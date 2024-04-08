@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Director</title>
+</head>
+<body>
+<div class="container">
+    <header class="navigation"><a th:href="@{'/directors'}" class="back-link">&#8592; Directors</a>
+        <a th:href="@{'/films'}" class="back-link">&#8592; Main page</a>
+    </header>
+    <h1>Director Information</h1>
+    <form th:action="@{/director/{directorId}/update(directorId = ${director.id})}" th:object="${director}"
+          method="post">
+        <div class="form-group"><label for="fullName">Full name:</label>
+            <input type="text" id="fullName" name="fullName" th:value="*{fullName}">
+        </div>
+        <div class="form-group">
+            <label for="birthday">Birthday:</label>
+            <input type="date" name="birthday" id="birthday" th:value="*{birthday}">
+        </div>
+        <button type="submit" class="btn">Update</button>
+    </form>
+    <form th:action="@{/directors/{directorId}/delete(directorId = ${director.id})}" method="post">
+        <br>
+        <button type="submit">Remove</button>
+    </form>
+</div>
+</body>
+</html>

@@ -2,97 +2,6 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Update User</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-
-        .form-container {
-            max-width: 500px;
-            margin: 50px auto;
-            padding: 30px;
-            border-radius: 5px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .header {
-            background-color: #333;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-            position: relative;
-        }
-
-        .header h1 {
-            margin: 0;
-            font-size: 32px;
-            font-weight: 600;
-        }
-
-        .header .back-link {
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #fff;
-            text-decoration: none;
-            font-size: 18px;
-            transition: color 0.3s ease;
-        }
-
-        .header .back-link:hover {
-            color: #ccc;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        input[type="text"],
-        input[type="email"],
-        input[type="password"] {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            font-size: 16px;
-            box-sizing: border-box; /* Include padding in width */
-        }
-
-        /* Style select element for a consistent look */
-        select {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            font-size: 16px;
-            box-sizing: border-box;
-        }
-
-        /* Style button for a more modern look */
-        button[type="submit"] {
-            background-color: #333;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 3px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        button[type="submit"]:hover {
-            background-color: #222;
-        }
-    </style>
 </head>
 <body>
 <div class="form-container">
@@ -119,7 +28,8 @@
         <br>
         <button type="submit">Update</button>
     </form>
-    <form th:action="@{/users/{userId}/delete(userId = ${user.id})}" th:if="${user.role.name() == 'ADMIN'}" method="post">
+    <form th:action="@{/users/{userId}/delete(userId = ${user.id})}" th:if="${user.role.name() == 'ADMIN'}"
+          method="post">
         <br>
         <button type="submit">Remove</button>
     </form>

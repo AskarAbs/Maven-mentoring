@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Directors</title>
+</head>
+<body>
+<div class="header">
+    <a th:href="@{'/directors/createDirector'}" class="btn btn-secondary">&#8592; Create director</a>
+    <h1>Directors:</h1>
+</div>
+<div th:each="director : ${directors}">
+    <div class="form-group">
+        <a th:href="@{'/directors/'+ ${director.id}}" th:text="${director.fullName}">Director</a>
+    </div>
+</div>
+</body>
+</html>
