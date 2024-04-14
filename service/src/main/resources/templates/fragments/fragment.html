@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Fragments</title>
+    <link href="/styles/fragment-style.css" rel="stylesheet">
+</head>
+<body>
+<div th:fragment="header" class="container-fluid d-flex justify-content-end align-items-center py-2">
+    <span th:text="${#authentication.principal.username}">Username</span>
+    <form action="/logout" method="post" class="ms-3">
+        <button type="submit" class="btn btn-sm btn-outline-primary">Logout</button>
+    </form>
+</div>
+</body>
+</html>

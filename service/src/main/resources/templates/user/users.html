@@ -2,8 +2,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>User List</title>
+    <link rel="stylesheet" href="/styles/users-style.css">
 </head>
 <body>
+<div th:insert="~{fragments/fragment :: header}"></div>
 <h1>Users</h1>
 <div th:each="user : ${users}">
     <div class="form-group">

@@ -46,7 +46,7 @@ public class UserServiceIT extends IntegrationTestBase {
         var actualUserReadDto = userService.create(userDto);
         assertThat(actualUserReadDto.getId()).isNotNull();
         assertThat(userDto.getEmail()).isEqualTo(actualUserReadDto.getEmail());
-        assertThat(userDto.getPassword()).isEqualTo(actualUserReadDto.getPassword());
+        assertThat(userDto.getRawPassword()).isEqualTo(actualUserReadDto.getPassword());
         assertThat(userDto.getUsername()).isEqualTo(actualUserReadDto.getUsername());
         assertThat(userDto.getRole()).isSameAs(actualUserReadDto.getRole());
     }
@@ -66,7 +66,7 @@ public class UserServiceIT extends IntegrationTestBase {
         actualResult.ifPresent(mbUser ->
         {
             assertThat(userDto.getEmail()).isEqualTo(mbUser.getEmail());
-            assertThat(userDto.getPassword()).isEqualTo(mbUser.getPassword());
+            assertThat(userDto.getRawPassword()).isEqualTo(mbUser.getPassword());
             assertThat(userDto.getUsername()).isEqualTo(mbUser.getUsername());
             assertThat(userDto.getRole()).isSameAs(mbUser.getRole());
         });

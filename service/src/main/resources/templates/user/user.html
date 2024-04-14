@@ -2,8 +2,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Update User</title>
+    <link rel="stylesheet" href="/styles/user-style.css">
 </head>
 <body>
+<div th:insert="~{fragments/fragment :: header}"></div>
 <div class="form-container">
     <div class="header">
         <a th:href="@{'/users'}" class="back-link">&#8592; Back</a>

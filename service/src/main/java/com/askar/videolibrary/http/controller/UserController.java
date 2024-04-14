@@ -3,6 +3,7 @@ package com.askar.videolibrary.http.controller;
 import com.askar.videolibrary.dto.UserCreateEditDto;
 import com.askar.videolibrary.entity.enums.Role;
 import com.askar.videolibrary.services.UserService;
+import com.askar.videolibrary.validation.group.CreateAction;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,13 +53,14 @@ public class UserController {
     }
 
     @PostMapping
-    public String create(@Validated UserCreateEditDto user, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String create(@Validated({CreateAction.class}) UserCreateEditDto user, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("user", user);
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
             return "redirect:/users/registration";
         }
-        return "redirect:/users/" + userService.create(user).getId();
+        userService.create(user);
+        return "redirect:/login";
     }
 
     @PostMapping("/{id}/update")

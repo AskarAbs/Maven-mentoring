@@ -8,8 +8,6 @@ import java.time.LocalDate;
 public class DirectorReadDto {
 
     Long id;
-
     String fullName;
-
     LocalDate birthday;
 }

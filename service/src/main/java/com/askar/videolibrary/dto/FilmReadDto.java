@@ -9,20 +9,12 @@ import java.time.LocalDate;
 public class FilmReadDto {
 
     Long id;
-
     String name;
-
     LocalDate releaseDate;
-
     String country;
-
     Genre genre;
-
     String trailer;
-
     String description;
-
     DirectorReadDto director;
-
     String image;
 }

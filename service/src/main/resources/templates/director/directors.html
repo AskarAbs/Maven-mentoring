@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Directors</title>
+    <link rel="stylesheet" href="/styles/directors-style.css">
 </head>
 <body>
 <div class="header">
-    <a th:href="@{'/directors/createDirector'}" class="btn btn-secondary">&#8592; Create director</a>
+    <a th:href="@{'/directors/create-director'}" class="btn btn-secondary">&#8592; Create director</a>
     <h1>Directors:</h1>
 </div>
 <div th:each="director : ${directors}">

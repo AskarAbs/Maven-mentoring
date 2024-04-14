@@ -39,7 +39,7 @@ public class FilmsController {
         return "film/films";
     }
 
-    @GetMapping("/createFilm")
+    @GetMapping("/create-film")
     public String createFilm(Model model) {
         model.addAttribute("genres", Genre.values());
         model.addAttribute("directors", directorService.findAll());

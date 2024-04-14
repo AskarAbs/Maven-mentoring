@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Registration</title>
+    <link rel="stylesheet" href="/styles/registration-style.css">
 </head>
 <title>Registration</title>
 <body>
@@ -17,9 +18,9 @@
         <input type="email" id="email" name="email" th:field="*{email}">
         <span th:if="${#fields.hasErrors('email')}" class="error">Email</span>
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" th:field="*{password}">
-        <span th:if="${#fields.hasErrors('password')}" class="error">Password</span>
+        <label for="rawPassword">Password:</label>
+        <input type="password" id="rawPassword" name="rawPassword">
+<!--        <span th:if="${#fields.hasErrors('password')}" class="error">Password</span>-->
 
         <label for="role">Role:</label>
         <select id="role" name="role" th:field="*{role}">

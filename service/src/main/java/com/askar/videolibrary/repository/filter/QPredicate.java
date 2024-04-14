@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -20,7 +21,7 @@ public class QPredicate {
     }
 
     public <T> QPredicate add(T object, Function<T, Predicate> function) {
-        if (object != null) {
+        if (object != null && !Objects.equals(object.toString(), "")) {
             predicates.add(function.apply(object));
         }
         return this;

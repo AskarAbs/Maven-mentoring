@@ -26,7 +26,7 @@ public class DirectorController {
         return "director/directors";
     }
 
-    @GetMapping("/createDirector")
+    @GetMapping("/create-director")
     public String createDirector() {
         return "director/createDirector";
     }
