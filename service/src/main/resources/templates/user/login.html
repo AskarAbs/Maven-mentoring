@@ -9,25 +9,28 @@
 <title>Login</title>
 <body>
 <div class="login-container">
-    <h1>Login</h1>
+    <h1>Login
+        <div th:insert="~{fragments/fragment :: locale}"></div>
+    </h1>
     <form action="/login" method="post" class="row g-3">
-        <div style="color: red" th:if = "${param.error}">
+        <div style="color: red" th:if="${param.error}">
             Bad credentials
         </div>
         <div class="col-auto">
-            <label for="username" class="visually-hidden">Email</label>
+            <label for="username" class="visually-hidden"><span th:text="#{login.email}">Email:</span></label>
             <input type="text" class="username" name="username" id="username" placeholder="email@example.com">
         </div>
         <div class="col-auto">
-            <label for="password" class="visually-hidden">Password</label>
+            <label for="password" class="visually-hidden"><span th:text="#{login.password}">Password:</span></label>
             <input type="password" name="password" class="password" id="password" placeholder="Password">
         </div>
         <div class="col-auto">
-            <button type="submit" class="btn btn-primary mb-3">Login</button>
+            <button type="submit" class="btn btn-primary mb-3"><span th:text="#{login.login}">Login:</span></button>
         </div>
     </form>
     <form th:action="@{/users/registration}" target="_blank">
-        <button type="submit" class="btn btn-primary mb-3">Registration</button>
+        <button type="submit" class="btn btn-primary mb-3"><span th:text="#{login.registration}">Registration:</span>
+        </button>
     </form>
 </div>
 </body>

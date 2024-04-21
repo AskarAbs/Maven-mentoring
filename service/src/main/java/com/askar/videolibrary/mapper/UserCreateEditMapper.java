@@ -1,6 +1,6 @@
 package com.askar.videolibrary.mapper;
 
-import com.askar.videolibrary.dto.UserCreateEditDto;
+import com.askar.videolibrary.dto.user.UserCreateEditDto;
 import com.askar.videolibrary.entity.Users;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;

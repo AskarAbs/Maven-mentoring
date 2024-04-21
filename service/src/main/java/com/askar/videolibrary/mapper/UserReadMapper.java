@@ -1,6 +1,6 @@
 package com.askar.videolibrary.mapper;
 
-import com.askar.videolibrary.dto.UserReadDto;
+import com.askar.videolibrary.dto.user.UserReadDto;
 import com.askar.videolibrary.entity.Users;
 import org.springframework.stereotype.Component;
 

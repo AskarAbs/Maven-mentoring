@@ -26,8 +26,7 @@ public class SecurityConfiguration {
         );
         http.formLogin(login -> login
                 .loginPage("/login")
-                .defaultSuccessUrl("/films")
-                .permitAll());
+                .defaultSuccessUrl("/films"));
         http.logout(logout -> logout
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/login"));

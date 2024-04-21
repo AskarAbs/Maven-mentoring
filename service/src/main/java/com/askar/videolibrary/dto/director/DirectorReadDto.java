@@ -1,13 +1,13 @@
-package com.askar.videolibrary.dto;
+package com.askar.videolibrary.dto.director;
 
 import lombok.Value;
 
 import java.time.LocalDate;
 
 @Value
-public class DirectorCreateEditDto {
+public class DirectorReadDto {
 
+    Long id;
     String fullName;
-
     LocalDate birthday;
 }

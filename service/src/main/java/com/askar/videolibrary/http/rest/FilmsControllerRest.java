@@ -1,8 +1,8 @@
 package com.askar.videolibrary.http.rest;
 
-import com.askar.videolibrary.dto.FilmCreateEditDto;
-import com.askar.videolibrary.dto.FilmFilter;
-import com.askar.videolibrary.dto.FilmReadDto;
+import com.askar.videolibrary.dto.film.FilmCreateEditDto;
+import com.askar.videolibrary.dto.film.FilmFilter;
+import com.askar.videolibrary.dto.film.FilmReadDto;
 import com.askar.videolibrary.dto.PageResponse;
 import com.askar.videolibrary.services.FilmService;
 import lombok.RequiredArgsConstructor;
@@ -32,7 +32,7 @@ public class FilmsControllerRest {
     private final FilmService filmService;
 
     @GetMapping
-    public PageResponse<FilmReadDto> findAll(Model model, FilmFilter filter, Pageable pageable) {
+    public PageResponse<FilmReadDto> findAll(FilmFilter filter, Pageable pageable) {
         var page = filmService.findAll(filter, pageable);
         return PageResponse.of(page);
     }

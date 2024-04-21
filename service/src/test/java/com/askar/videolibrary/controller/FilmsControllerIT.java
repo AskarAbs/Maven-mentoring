@@ -8,14 +8,14 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static com.askar.videolibrary.dto.FilmCreateEditDto.Fields.country;
-import static com.askar.videolibrary.dto.FilmCreateEditDto.Fields.description;
-import static com.askar.videolibrary.dto.FilmCreateEditDto.Fields.directorId;
-import static com.askar.videolibrary.dto.FilmCreateEditDto.Fields.genre;
-import static com.askar.videolibrary.dto.FilmCreateEditDto.Fields.image;
-import static com.askar.videolibrary.dto.FilmCreateEditDto.Fields.name;
-import static com.askar.videolibrary.dto.FilmCreateEditDto.Fields.releaseDate;
-import static com.askar.videolibrary.dto.FilmCreateEditDto.Fields.trailer;
+import static com.askar.videolibrary.dto.film.FilmCreateEditDto.Fields.country;
+import static com.askar.videolibrary.dto.film.FilmCreateEditDto.Fields.description;
+import static com.askar.videolibrary.dto.film.FilmCreateEditDto.Fields.directorId;
+import static com.askar.videolibrary.dto.film.FilmCreateEditDto.Fields.genre;
+import static com.askar.videolibrary.dto.film.FilmCreateEditDto.Fields.image;
+import static com.askar.videolibrary.dto.film.FilmCreateEditDto.Fields.name;
+import static com.askar.videolibrary.dto.film.FilmCreateEditDto.Fields.releaseDate;
+import static com.askar.videolibrary.dto.film.FilmCreateEditDto.Fields.trailer;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrlPattern;

@@ -1,6 +1,6 @@
 package com.askar.videolibrary.service;
 
-import com.askar.videolibrary.dto.UserCreateEditDto;
+import com.askar.videolibrary.dto.user.UserCreateEditDto;
 import com.askar.videolibrary.entity.Users;
 import com.askar.videolibrary.entity.enums.Role;
 import com.askar.videolibrary.repository.IntegrationTestBase;

@@ -48,8 +48,12 @@
             <img width="100" height="100" th:src="@{/api/v1/films/{filmId}/avatar(filmId = ${film.id})}"
                  alt="Film image">
         </div>
+        <p class="film-director" th:if="${film.avgEvaluation}" th:text="${'Evaluation: ' + film.avgEvaluation}">Evaluation</p>
         <p class="film-description" th:text="${film.description}">Description</p>
         <p class="film-director" th:text="'Director: ' + ${film.director.fullName}">Director: Director Name</p>
+        <p class="film-director" th:if="${film.actors}">Actors: </p>
+        <p class="film-director" th:each="actor : ${film.getActors()}" th:text="${ actor.fullName}">Actor: actorName</p>
+        <link>
         <a th:href="@{'/films/' + ${film.id}}" class="film-link">View Film</a>
     </div>
 </div>

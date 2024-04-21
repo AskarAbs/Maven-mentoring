@@ -1,6 +1,6 @@
 package com.askar.videolibrary.http.controller;
 
-import com.askar.videolibrary.dto.UserCreateEditDto;
+import com.askar.videolibrary.dto.user.UserCreateEditDto;
 import com.askar.videolibrary.entity.enums.Role;
 import com.askar.videolibrary.services.UserService;
 import com.askar.videolibrary.validation.group.CreateAction;

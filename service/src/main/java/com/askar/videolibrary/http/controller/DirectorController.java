@@ -1,6 +1,6 @@
 package com.askar.videolibrary.http.controller;
 
-import com.askar.videolibrary.dto.DirectorCreateEditDto;
+import com.askar.videolibrary.dto.director.DirectorCreateEditDto;
 import com.askar.videolibrary.services.DirectorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

@@ -1,8 +1,9 @@
 package com.askar.videolibrary.http.controller;
 
-import com.askar.videolibrary.dto.FilmCreateEditDto;
-import com.askar.videolibrary.dto.FilmFilter;
+import com.askar.videolibrary.config.AuditConfiguration;
 import com.askar.videolibrary.dto.PageResponse;
+import com.askar.videolibrary.dto.film.FilmCreateEditDto;
+import com.askar.videolibrary.dto.film.FilmFilter;
 import com.askar.videolibrary.entity.enums.Genre;
 import com.askar.videolibrary.services.DirectorService;
 import com.askar.videolibrary.services.FilmService;
@@ -28,6 +29,17 @@ public class FilmsController {
 
     private final FilmService filmService;
     private final DirectorService directorService;
+    private final AuditConfiguration auditConfiguration;
+
+    @PostMapping("/create-review/{id}")
+    public String createReview(@PathVariable("id") Long id, Model model) {
+        return filmService.findById(id)
+                .map(film -> {
+                    model.addAttribute("film", film);
+                    model.addAttribute("email", auditConfiguration.auditorAware().getCurrentAuditor().orElseThrow());
+                    return "review/createReview";
+                }).orElseThrow(() -> new ResponseStatusException(NOT_FOUND));
+    }
 
     @GetMapping
     public String findAll(Model model, FilmFilter filter, Pageable pageable) {

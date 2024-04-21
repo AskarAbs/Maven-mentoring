@@ -1,7 +1,7 @@
 package com.askar.videolibrary.services;
 
-import com.askar.videolibrary.dto.DirectorCreateEditDto;
-import com.askar.videolibrary.dto.DirectorReadDto;
+import com.askar.videolibrary.dto.director.DirectorCreateEditDto;
+import com.askar.videolibrary.dto.director.DirectorReadDto;
 import com.askar.videolibrary.mapper.DirectorCreateEditMapper;
 import com.askar.videolibrary.mapper.DirectorReadMapper;
 import com.askar.videolibrary.repository.DirectorRepository;

@@ -1,6 +1,6 @@
 package com.askar.videolibrary.repository;
 
-import com.askar.videolibrary.dto.FilmFilter;
+import com.askar.videolibrary.dto.film.FilmFilter;
 import com.askar.videolibrary.entity.enums.Genre;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;

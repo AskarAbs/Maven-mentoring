@@ -1,4 +1,4 @@
-package com.askar.videolibrary.dto;
+package com.askar.videolibrary.dto.user;
 
 import com.askar.videolibrary.entity.enums.Role;
 import com.askar.videolibrary.validation.group.CreateAction;

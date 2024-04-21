@@ -13,3 +13,5 @@ spring:
           connection:
             pool_size: 12
     open-in-view: false
+  messages:
+    basename: messages

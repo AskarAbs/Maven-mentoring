@@ -1,6 +1,6 @@
 package com.askar.videolibrary.mapper;
 
-import com.askar.videolibrary.dto.DirectorReadDto;
+import com.askar.videolibrary.dto.director.DirectorReadDto;
 import com.askar.videolibrary.entity.Director;
 import org.springframework.stereotype.Component;
 

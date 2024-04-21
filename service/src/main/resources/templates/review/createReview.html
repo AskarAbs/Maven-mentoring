@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Review</title>
+</head>
+<body>
+<form th:action="@{/review}" th:object="${film}" method="post">
+
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email" th:value="${email}">
+    <br>
+
+    <label for="filmId">Film:</label>
+    <input type="hidden" id="filmId" name="filmId" th:value="*{id}">
+
+    <label for="text">Description:</label>
+    <textarea id="text" name="text"></textarea>
+
+    <label for="evaluation">Genre:</label>
+    <select id="evaluation" name="evaluation">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+    </select>
+
+    <button type="submit">Create</button>
+</form>
+</body>
+</html>

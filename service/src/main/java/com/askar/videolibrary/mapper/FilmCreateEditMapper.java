@@ -1,9 +1,12 @@
 package com.askar.videolibrary.mapper;
 
-import com.askar.videolibrary.dto.FilmCreateEditDto;
+import com.askar.videolibrary.dto.film.FilmCreateEditDto;
 import com.askar.videolibrary.entity.Director;
 import com.askar.videolibrary.entity.Film;
+import com.askar.videolibrary.entity.FilmActor;
+import com.askar.videolibrary.repository.ActorRepository;
 import com.askar.videolibrary.repository.DirectorRepository;
+import com.askar.videolibrary.repository.FilmActorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,6 +19,7 @@ import java.util.function.Predicate;
 public class FilmCreateEditMapper implements Mapper<FilmCreateEditDto, Film> {
 
     private final DirectorRepository directorRepository;
+    private final FilmActorRepository filmActorRepository;
 
     @Override
     public Film map(FilmCreateEditDto object) {
@@ -44,9 +48,16 @@ public class FilmCreateEditMapper implements Mapper<FilmCreateEditDto, Film> {
         film.setGenre(object.getGenre());
         film.setTrailer(object.getTrailer());
         film.setDescription(object.getDescription());
+        film.setFilmActors(getActors(object.getFilmActorId()).stream().toList());
 
         Optional.ofNullable(object.getImage())
                 .filter(Predicate.not(MultipartFile::isEmpty))
                 .ifPresent(image -> film.setImage(image.getOriginalFilename()));
+    }
+
+    private Optional<FilmActor> getActors(Long filmActorId){
+        return Optional.ofNullable(filmActorId)
+                .map(filmActorRepository::findById)
+                .orElse(null);
     }
 }

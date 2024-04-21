@@ -1,4 +1,4 @@
-package com.askar.videolibrary.dto;
+package com.askar.videolibrary.dto.film;
 
 import com.askar.videolibrary.entity.enums.Genre;
 import lombok.Value;
@@ -19,4 +19,5 @@ public class FilmCreateEditDto {
     String description;
     Long directorId;
     MultipartFile image;
+    Long filmActorId;
 }

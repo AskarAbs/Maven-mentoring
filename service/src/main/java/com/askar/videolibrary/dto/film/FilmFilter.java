@@ -1,4 +1,4 @@
-package com.askar.videolibrary.dto;
+package com.askar.videolibrary.dto.film;
 
 import com.askar.videolibrary.entity.enums.Genre;
 import lombok.Builder;

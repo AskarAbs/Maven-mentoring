@@ -7,10 +7,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static com.askar.videolibrary.dto.UserCreateEditDto.Fields.email;
-import static com.askar.videolibrary.dto.UserCreateEditDto.Fields.rawPassword;
-import static com.askar.videolibrary.dto.UserCreateEditDto.Fields.role;
-import static com.askar.videolibrary.dto.UserCreateEditDto.Fields.username;
+import static com.askar.videolibrary.dto.user.UserCreateEditDto.Fields.email;
+import static com.askar.videolibrary.dto.user.UserCreateEditDto.Fields.rawPassword;
+import static com.askar.videolibrary.dto.user.UserCreateEditDto.Fields.role;
+import static com.askar.videolibrary.dto.user.UserCreateEditDto.Fields.username;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;

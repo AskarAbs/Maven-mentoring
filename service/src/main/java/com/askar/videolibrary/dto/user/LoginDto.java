@@ -1,4 +1,4 @@
-package com.askar.videolibrary.dto;
+package com.askar.videolibrary.dto.user;
 
 import lombok.Value;
 

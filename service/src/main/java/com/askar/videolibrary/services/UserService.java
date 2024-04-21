@@ -1,7 +1,7 @@
 package com.askar.videolibrary.services;
 
-import com.askar.videolibrary.dto.UserCreateEditDto;
-import com.askar.videolibrary.dto.UserReadDto;
+import com.askar.videolibrary.dto.user.UserCreateEditDto;
+import com.askar.videolibrary.dto.user.UserReadDto;
 import com.askar.videolibrary.mapper.UserCreateEditMapper;
 import com.askar.videolibrary.mapper.UserReadMapper;
 import com.askar.videolibrary.repository.UsersRepository;

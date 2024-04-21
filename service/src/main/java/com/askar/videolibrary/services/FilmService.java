@@ -1,12 +1,13 @@
 package com.askar.videolibrary.services;
 
-import com.askar.videolibrary.dto.FilmCreateEditDto;
-import com.askar.videolibrary.dto.FilmFilter;
-import com.askar.videolibrary.dto.FilmReadDto;
+import com.askar.videolibrary.dto.film.FilmCreateEditDto;
+import com.askar.videolibrary.dto.film.FilmFilter;
+import com.askar.videolibrary.dto.film.FilmReadDto;
 import com.askar.videolibrary.entity.Film;
 import com.askar.videolibrary.mapper.FilmCreateEditMapper;
 import com.askar.videolibrary.mapper.FilmReadMapper;
 import com.askar.videolibrary.repository.FilmRepository;
+import com.askar.videolibrary.repository.ReviewRepository;
 import com.askar.videolibrary.repository.filter.QPredicate;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -30,7 +31,6 @@ public class FilmService {
     private final FilmReadMapper filmReadMapper;
     private final FilmCreateEditMapper filmCreateEditMapper;
     private final ImageService imageService;
-
 
     public Page<FilmReadDto> findAll(FilmFilter filter, Pageable pageable) {
         var predicate = QPredicate.builder()
